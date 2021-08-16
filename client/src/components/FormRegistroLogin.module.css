@@ -1,0 +1,20 @@
+.header{
+    padding: 0px;
+}
+
+.logo{
+    height: 300px;
+    width: 300px;
+}
+
+.title{
+    margin-top: 120px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.formulario{
+    border: 1px solid rgb(201, 38, 38);
+    border-radius: 5px;
+    padding: 10px;
+}
