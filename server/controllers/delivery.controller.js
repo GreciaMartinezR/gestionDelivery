@@ -1,4 +1,8 @@
 const { Delivery } = require('../models/delivery.model');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { secret } = require('../config/jwt.config');
+
 
     // Método para crear pirata
 module.exports.createDelivery = (request, response) => {
@@ -39,9 +43,21 @@ module.exports.createDelivery = (request, response) => {
 
     // Método para obtener lista de piratas
 module.exports.getAllDelivery = (request, response) => {
-    Delivery.find({})
-        .then(delivery => response.json(delivery))
-        .catch(err => response.json(err))
+    jwt.verify(request.cookies.usertoken, secret, (err, payload) => {
+        if (err) {
+          res.status(401).json({verified: false});
+        } else {
+           if (payload.userType == "Admin"){
+                    Delivery.find({})
+                        .then(delivery => response.json(delivery))
+                        .catch(err => response.json(err))
+            } else {
+                    Delivery.find({clientEmail: payload.userEmail})
+                        .then(delivery => response.json(delivery))
+                        .catch(err => response.json(err))
+            }
+        }
+      });
     }
 
 

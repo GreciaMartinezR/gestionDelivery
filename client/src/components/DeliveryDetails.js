@@ -45,7 +45,7 @@ const DeliveryDetails = ({ id }) => {
   }, []);
 
   return (
-    <Container>
+    <Container className={styles.spaceContainer}>
       <Row>
         <Col xs={12} md={6}>
           <img src={logo} className={styles.logo} alt="Logo Gestión Delivery" />

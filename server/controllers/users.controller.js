@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { secret } = require('../config/jwt.config');
 
-/* module.exports.usuarioAdmin = () => {
+module.exports.usuarioAdmin = () => {
     Users.find({email: 'admin@test.com'}) 
         .then(users => {
             if(!users || users.length == 0) {
@@ -12,7 +12,7 @@ const { secret } = require('../config/jwt.config');
                     .catch(err => console.log('Error al crear el usuario inicial', err))
             }
         })
-}  */
+}  
 
 module.exports.registro = (req, res) => {
     Users.findOne({ userEmail: req.body.userEmail })

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FormRegistroLogin from './components/FormRegistroLogin';
 import PantallaInicio from './components/PantallaInicio'
@@ -8,11 +8,20 @@ import DeliveryDetails from './components/DeliveryDetails';
 import { Router } from '@reach/router';
 import DeliveryEdit from './components/DeliveryEdit';
 import UserContext from './context/userContext';
+import './App.css'
 
 function App() {
 
   const [users, setUsers] = useState({});
   const[listState, setListState] = useState([])
+
+  useEffect(() => {
+    
+    if (localStorage.getItem("user")) {
+      setUsers(JSON.parse(localStorage.getItem("user")))
+      
+    }
+  }, [])
 
   return (
     <UserContext.Provider value={{users, setUsers}}>

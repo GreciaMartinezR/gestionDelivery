@@ -65,6 +65,7 @@ const DeliveryEdit = ({ id }) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 minLength={2}
                 name="clientName"
                 value={stateDelivery.clientName}
@@ -77,6 +78,7 @@ const DeliveryEdit = ({ id }) => {
               <Form.Control
                 type="email"
                 required
+                readOnly
                 name="clientEmail"
                 value={stateDelivery.clientEmail}
                 onChange={(e) => handleChangeForm(e)}
@@ -104,6 +106,7 @@ const DeliveryEdit = ({ id }) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 name="clientAddress"
                 value={stateDelivery.clientAddress}
                 onChange={(e) => handleChangeForm(e)}
@@ -115,6 +118,7 @@ const DeliveryEdit = ({ id }) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 name="clientPhone"
                 value={stateDelivery.clientPhone}
                 onChange={(e) => handleChangeForm(e)}

@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import styles from "./FormRegistroLogin.module.css";
 import logo from "../imagen/logo.png";
+import Swal from 'sweetalert2'
 
 const FormRegistroLogin = () => {
 
@@ -59,7 +60,7 @@ const FormRegistroLogin = () => {
             userPassword: "",
             userConfirmPassword: "",
           });
-          alert("Inicia sesión");
+          Swal.fire("Gracias por registrarte, inicia sesión");
         }
       })
       .catch((error) => console.log(error, "error"));
@@ -81,11 +82,12 @@ const FormRegistroLogin = () => {
     axios.post("/api/login/", inputs).then((resp) => {
       if (resp.data && !resp.data.error) {
         setUsers(resp.data.data)
+        localStorage.setItem("user", JSON.stringify(resp.data.data));
         console.log("Por aqui el data data", resp.data.data)
         navigate("/inicio/");
       } else {
 
-        console.log("Error", resp.data.mensaje, "error");
+        Swal.fire('Error', resp.data.mensaje, 'error');
       }
     });
   };

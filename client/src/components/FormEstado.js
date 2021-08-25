@@ -17,13 +17,16 @@ import {
   faSpinner,
   faCheckCircle,
   faSignOutAlt,
+  faFileDownload
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./FormEstado.module.css";
 import logo from "../imagen/logo.png";
+import Swal from 'sweetalert2'
 
 const FormEstado = (props, { id }) => {
 
   const context = useContext(UserContext);
+  const [file, setFile] = useState({});
 
   const getAllDelivery = () => {
     axios
@@ -37,12 +40,25 @@ const FormEstado = (props, { id }) => {
     getAllDelivery();
   }, []);
   console.log("Aqui va el user", context.users)
+
   // Código para eliminar
   const deleteDelivery = (event, id) => {
-    axios.delete(`/api/delivery/${id}`).then((res) => {
+    Swal.fire({
+      title: 'Estás seguro que deseas borrar?',
+      text: 'No podrás recuperar este archivo',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Si!',
+      cancelButtonText: 'No.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`/api/delivery/${id}`).then((res) => {
       const delivery = props.deliveryArray.filter((p) => p._id !== id);
       props.setDeliveryArray(delivery);
     });
+      }
+    })
+    
   };
 
   //Código para actualizar estado
@@ -56,18 +72,50 @@ const FormEstado = (props, { id }) => {
       });
   };
 
+  //Código para subir archivo
+  const subirArchivo = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append(
+        'file',
+        file,
+        file.name
+    )
+
+    axios.post('/api/file', formData, {enctype:"multipart/form-data"})
+        .then(resp => {
+          Swal.fire("Archivo cargado con éxito");
+          navigate("/inicio/")
+        })
+        .catch(error => {
+          console.log(error)
+          Swal.fire("No se cargó el archivo")
+        });
+}
+
+  //Código para el Logout
+  const Logout = (e) =>{
+    e.preventDefault();
+    localStorage.removeItem('user');
+    navigate('/');
+}
+
   return (
-    <Container className={styles.formCrearContainer}>
+    <Container className={styles.spaceContainer}>
       <Row>
         <Col xs={6} md={6}>
           <img src={logo} className={styles.logo} alt="Logo Gestión Delivery" />
         </Col>
 
         <Col xs={6} md={6}>
-        <FontAwesomeIcon
-          icon={faSignOutAlt}
-        />
-          <h1 className={styles.title}>Gestión de Delivery</h1>
+          <Row style={{justifyContent: "flex-end"}}>
+            <Col xs={6}>
+              <Button onClick={Logout} variant="dark">Cerrar sesión <FontAwesomeIcon icon={faSignOutAlt}/></Button>{' '}
+            </Col>
+          </Row>
+          <Row style={{marginTop: "20%"}}>
+            <h1 className="text-center">Gestión de Delivery</h1>
+          </Row>
         </Col>
 
       </Row>
@@ -82,6 +130,7 @@ const FormEstado = (props, { id }) => {
             <th>Cliente</th>
             <th>Cantidad de Productos</th>
             <th>Estado del Requerimiento</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -91,6 +140,20 @@ const FormEstado = (props, { id }) => {
               <td>{delivery.clientName}</td>
               <td>{delivery.productClient}</td>
               <td>{delivery.statusDelivery}</td>
+
+              {context.users.userType &&
+                  context.users.userType == "Client" && (
+              <td>
+              <form onSubmit={subirArchivo} encType="multipart/form-data">
+                    <input type="file" name="file" onChange={e => setFile(e.target.files[0])}/>
+                    <Button size="sm" type="submit">
+                <FontAwesomeIcon
+                  className={styles.iconDetails}
+                  icon={faFileUpload}
+                /></Button>
+                </form>
+              </td>
+              )}
               <td>
                 <Link to={`/delivery/${delivery._id}`}>
                   {" "}
@@ -99,11 +162,8 @@ const FormEstado = (props, { id }) => {
                     icon={faInfo}
                   />{" "}
                 </Link>
-                <FontAwesomeIcon
-                  className={styles.iconDetails}
-                  icon={faFileUpload}
-                />
-                {delivery.statusDelivery != "Finalizado" && (
+
+                {delivery.statusDelivery != "Finalizar" && (
                   <Link to={`/edit/${delivery._id}`}>
                     <FontAwesomeIcon
                       className={styles.iconDetails}
@@ -130,6 +190,14 @@ const FormEstado = (props, { id }) => {
                       className={styles.iconDetails}
                       onClick={() => cambioEstado("Finalizado", delivery)}
                       icon={faCheckCircle}
+                    />
+                  )}
+
+                  {context.users.userType &&
+                  context.users.userType == "Admin" && (
+                    <FontAwesomeIcon
+                      className={styles.iconDetails}
+                      icon={faFileDownload}
                     />
                   )}
               </td>

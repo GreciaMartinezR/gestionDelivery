@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, Router, navigate } from "@reach/router";
 import Form from "react-bootstrap/Form";
@@ -9,13 +9,18 @@ import Row from "react-bootstrap/Row";
 import styles from "./FormCrear.module.css";
 import logo from "../imagen/logo.png";
 import moment from "moment";
+import Swal from 'sweetalert2';
+import UserContext from "../context/userContext";
 
 const FormCrear = (props) => {
+
+  const context = useContext(UserContext);
+
   const [stateDelivery, setStateDelivery] = useState({
-    clientName: "",
-    clientAddress: "",
-    clientEmail: "",
-    clientPhone: "",
+    clientName: context.users.userName,
+    clientAddress: context.users.userAddress,
+    clientEmail: context.users.userEmail,
+    clientPhone: context.users.userPhone,
     productClient: "",
     dateClient: "",
     timeClient: "",
@@ -50,6 +55,7 @@ const FormCrear = (props) => {
       .post("/api/delivery", data)
       .then((res) => {
         props.setListState([...props.listState, res.data]);
+        Swal.fire("Requerimiento creado");
         navigate("/inicio/");
       })
       .catch((error) => {
@@ -75,6 +81,7 @@ const FormCrear = (props) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 minLength={2}
                 name="clientName"
                 value={stateDelivery.clientName}
@@ -87,6 +94,7 @@ const FormCrear = (props) => {
               <Form.Control
                 type="email"
                 required
+                readOnly
                 name="clientEmail"
                 value={stateDelivery.clientEmail}
                 onChange={handleChangeForm}
@@ -114,6 +122,7 @@ const FormCrear = (props) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 name="clientAddress"
                 value={stateDelivery.clientAddress}
                 onChange={handleChangeForm}
@@ -125,6 +134,7 @@ const FormCrear = (props) => {
               <Form.Control
                 type="text"
                 required
+                readOnly
                 name="clientPhone"
                 value={stateDelivery.clientPhone}
                 onChange={handleChangeForm}
