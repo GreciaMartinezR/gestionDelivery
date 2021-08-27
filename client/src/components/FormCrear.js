@@ -224,7 +224,7 @@ const FormCrear = (props) => {
                 value={stateDelivery.destinoProductII}
                 onChange={handleChangeForm}
               />
-               {(stateDelivery.destinoProductII.length > 0 && stateDelivery.destinoProductII.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
+              {(stateDelivery.destinoProductII.length > 0 && stateDelivery.destinoProductII.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
             </Form.Group>
           </Col>
         </Row>
@@ -252,7 +252,7 @@ const FormCrear = (props) => {
                 value={stateDelivery.destinoProductIII}
                 onChange={handleChangeForm}
               />
-               {(stateDelivery.destinoProductIII.length > 0 && stateDelivery.destinoProductIII.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
+              {(stateDelivery.destinoProductIII.length > 0 && stateDelivery.destinoProductIII.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
             </Form.Group>
           </Col>
         </Row>
@@ -280,7 +280,7 @@ const FormCrear = (props) => {
                 value={stateDelivery.destinoProductIV}
                 onChange={handleChangeForm}
               />
-               {(stateDelivery.destinoProductIV.length > 0 && stateDelivery.destinoProductIV.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
+              {(stateDelivery.destinoProductIV.length > 0 && stateDelivery.destinoProductIV.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
             </Form.Group>
           </Col>
         </Row>
@@ -309,12 +309,13 @@ const FormCrear = (props) => {
                 value={stateDelivery.destinoProductV}
                 onChange={handleChangeForm}
               />
-               {(stateDelivery.destinoProductV.length > 0 && stateDelivery.destinoProductV.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
+              {(stateDelivery.destinoProductV.length > 0 && stateDelivery.destinoProductV.length < 4) ? <p style={{color: "red"}}>La dirección de destino debe tener al menos 4 caracteres</p> : ""}
             </Form.Group>
           </Col>
         </Row>
         <hr></hr>
 
+        
         <Row className="justify-content-md-center">
           <Col xs={6}>
             <div className="d-grid gap-2">

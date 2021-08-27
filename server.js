@@ -23,6 +23,6 @@ app.post('/api/file', upload.single('file'), function (req, res, next) {
 
 require('./server/routes/users.routes')(app);
 require('./server/routes/delivery.routes')(app);
-// usuarioAdmin();
+//usuarioAdmin();
 
 const server = app.listen(8000, () => console.log("Servidor de Gestion de Delivery Conectado"));

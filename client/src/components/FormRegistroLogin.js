@@ -167,7 +167,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userPhone}
                     onChange={handleChangeLogin}
                   />
-                  {(registroForm.userPhone.length > 0 && registroForm.userPhone.length < 5) ? (<p style={{color: "red"}}>Debe ingresar su número telefónico</p>) : "" }
+                   {(registroForm.userPhone.length > 0 && registroForm.userPhone.length < 5) ? (<p style={{color: "red"}}>Debe ingresar su número telefónico</p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -182,7 +182,10 @@ const FormRegistroLogin = () => {
                     value={registroForm.userPassword}
                     onChange={handleChangeLogin}
                   />
-                  {(registroForm.userPassword.length > 0 && registroForm.userPassword.length < 8) ? (<p style={{color: "red"}}>La contraseña debe tener al menos 8 caracteres</p>) : "" }
+                   {(registroForm.userPassword.length > 0 && registroForm.userPassword.length < 8) ? (<p style={{color: "red"}}>La contraseña debe tener al menos 8 caracteres</p>) : "" }
+                  <Form.Text className="text-muted">
+                    {/* Debe tener mínimo 8 caracteres. */}
+                  </Form.Text>
                 </Form.Group>
               </Col>
 
@@ -198,6 +201,9 @@ const FormRegistroLogin = () => {
                     onChange={handleChangeLogin}
                   />
                   {(registroForm.userPassword !== registroForm.userConfirmPassword) ? (<p style={{color: "red"}}>Las contraseñas deben coincidir </p>) : "" }
+                  <Form.Text className="text-muted">
+                    {/* La contraseña debe coincidir con el campo anterior */}
+                  </Form.Text>
                 </Form.Group>
               </Col>
 
