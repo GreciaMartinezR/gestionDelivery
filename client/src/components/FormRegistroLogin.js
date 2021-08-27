@@ -122,6 +122,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userName}
                     onChange={handleChangeLogin}
                   />
+                  {(registroForm.userName.length > 0 && registroForm.userName.length < 6) ? (<p style={{color: "red"}}>Nombre y apellido deben tener mas de 6 caracteres</p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -136,6 +137,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userEmail}
                     onChange={handleChangeLogin}
                   />
+                  {(registroForm.userEmail.length > 0 && registroForm.userEmail.length < 5) ? (<p style={{color: "red"}}>Debe ingresar un correo electrónico name@mail.com</p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -150,6 +152,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userAddress}
                     onChange={handleChangeLogin}
                   />
+                  {(registroForm.userAddress.length > 0 && registroForm.userAddress.length < 4) ? (<p style={{color: "red"}}>Debe ingresar su dirección </p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -164,6 +167,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userPhone}
                     onChange={handleChangeLogin}
                   />
+                  {(registroForm.userPhone.length > 0 && registroForm.userPhone.length < 5) ? (<p style={{color: "red"}}>Debe ingresar su número telefónico</p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -178,9 +182,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userPassword}
                     onChange={handleChangeLogin}
                   />
-                  <Form.Text className="text-muted">
-                    Debe tener mínimo 8 caracteres.
-                  </Form.Text>
+                  {(registroForm.userPassword.length > 0 && registroForm.userPassword.length < 8) ? (<p style={{color: "red"}}>La contraseña debe tener al menos 8 caracteres</p>) : "" }
                 </Form.Group>
               </Col>
 
@@ -195,9 +197,7 @@ const FormRegistroLogin = () => {
                     value={registroForm.userConfirmPassword}
                     onChange={handleChangeLogin}
                   />
-                  <Form.Text className="text-muted">
-                    La contraseña debe coincidir con el campo anterior
-                  </Form.Text>
+                  {(registroForm.userPassword !== registroForm.userConfirmPassword) ? (<p style={{color: "red"}}>Las contraseñas deben coincidir </p>) : "" }
                 </Form.Group>
               </Col>
 

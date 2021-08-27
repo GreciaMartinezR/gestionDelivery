@@ -163,7 +163,7 @@ const FormEstado = (props, { id }) => {
                   />{" "}
                 </Link>
 
-                {(delivery.statusDelivery != "En proceso" || delivery.statusDelivery != "Finalizar") ? "" : (
+                  {delivery.statusDelivery != "En proceso" && delivery.statusDelivery != "Finalizado" &&(
                   <Link to={`/edit/${delivery._id}`}>
                     <FontAwesomeIcon
                       className={styles.iconDetails}
