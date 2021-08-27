@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -50,7 +50,7 @@ const DeliveryEdit = ({ id }) => {
     <Container>
       <Row>
         <Col xs={12} md={6}>
-          <img src={logo} className={styles.logo} alt="Logo Gestión Delivery" />
+        <Link to= {`/inicio/`}><img src={logo} className={styles.logo} alt="Logo Gestión Delivery" /></Link>
         </Col>
         <Col xs={12} md={6}>
           <h1 className={styles.title}>Gestión de Delivery</h1>

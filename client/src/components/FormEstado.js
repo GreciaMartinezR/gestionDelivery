@@ -104,7 +104,7 @@ const FormEstado = (props, { id }) => {
     <Container className={styles.spaceContainer}>
       <Row>
         <Col xs={6} md={6}>
-          <img src={logo} className={styles.logo} alt="Logo Gestión Delivery" />
+        <Link to= {`/inicio/`}><img src={logo} className={styles.logo} alt="Logo Gestión Delivery" /></Link>
         </Col>
 
         <Col xs={6} md={6}>
@@ -163,7 +163,7 @@ const FormEstado = (props, { id }) => {
                   />{" "}
                 </Link>
 
-                {delivery.statusDelivery != "Finalizar" && (
+                {(delivery.statusDelivery != "En proceso" || delivery.statusDelivery != "Finalizar") ? "" : (
                   <Link to={`/edit/${delivery._id}`}>
                     <FontAwesomeIcon
                       className={styles.iconDetails}
@@ -171,11 +171,15 @@ const FormEstado = (props, { id }) => {
                     />
                   </Link>
                 )}
+
+                {delivery.statusDelivery != "En proceso" &&(
                 <FontAwesomeIcon
                   className={styles.iconDetails}
                   onClick={(event) => deleteDelivery(event, delivery._id)}
                   icon={faTrashAlt}
                 />
+                )}
+
                 {context.users.userType &&
                   context.users.userType == "Admin" && (
                     <FontAwesomeIcon
@@ -193,13 +197,13 @@ const FormEstado = (props, { id }) => {
                     />
                   )}
 
-                  {context.users.userType &&
+                  {/* {context.users.userType &&
                   context.users.userType == "Admin" && (
                     <FontAwesomeIcon
                       className={styles.iconDetails}
                       icon={faFileDownload}
                     />
-                  )}
+                  )} */}
               </td>
             </tr>
           ))}

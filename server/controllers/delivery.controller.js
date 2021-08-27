@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { secret } = require('../config/jwt.config');
 
 
-    // Método para crear pirata
+    // Método para crear requerimiento
 module.exports.createDelivery = (request, response) => {
     console.log("INGRESO A CREATE DELIVERY")
     const { clientName, clientAddress, clientEmail, clientPhone, productClient, dateClient, timeClient, nameProductI, destinoProductI, nameProductII, destinoProductII, nameProductIII, destinoProductIII, nameProductIV, destinoProductIV, nameProductV, destinoProductV} = request.body;
@@ -41,7 +41,7 @@ module.exports.createDelivery = (request, response) => {
     });
 }
 
-    // Método para obtener lista de piratas
+    // Método para obtener lista de delivery
 module.exports.getAllDelivery = (request, response) => {
     jwt.verify(request.cookies.usertoken, secret, (err, payload) => {
         if (err) {
